@@ -81,41 +81,87 @@ export default function PortfolioPage() {
       <div className="flex h-full items-center justify-center px-4 sm:px-8">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center max-w-6xl">
           <motion.div variants={itemVariants} className="mb-8 sm:mb-16 flex justify-center">
-            <motion.div 
-              className="relative h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full border-2 border-foreground/30"
-              style={{
-                boxShadow: "0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(255, 255, 255, 0.1)"
-              }}
-              animate={{
-                rotate: 360
-              }}
-              transition={{
-                duration: 20,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear"
-              }}
-            >
-              <motion.img 
-                src="/img1.jpg" 
-                alt="Profile Avatar"
-                className="w-full h-full object-cover"
-                animate={{
-                  rotate: -360
-                }}
+            <div className="relative h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
+              {/* Multiple glowing points around border */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ rotate: 360 }}
                 transition={{
-                  duration: 20,
+                  duration: 8,
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "linear"
                 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" />
-            </motion.div>
+              >
+                {/* Main glowing point */}
+                <motion.div
+                  className="absolute top-0 left-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full -translate-x-1/2 -translate-y-1/2"
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0.8, 1.2, 0.8],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  style={{
+                    background: "transparent",
+                    boxShadow: "0 0 15px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.5)"
+                  }}
+                />
+              </motion.div>
+
+              {/* Additional glowing trail points */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ rotate: -360 }}
+                transition={{
+                  duration: 12,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "linear"
+                }}
+              >
+                <motion.div
+                  className="absolute top-1/2 right-0 w-2 h-2 sm:w-3 sm:h-3 rounded-full -translate-y-1/2 translate-x-1/2"
+                  animate={{
+                    opacity: [0, 0.7, 0],
+                    scale: [0.6, 1, 0.6],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                  style={{
+                    background: "transparent",
+                    boxShadow: "0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.3)"
+                  }}
+                />
+              </motion.div>
+
+              {/* Profile image container */}
+              <div 
+                className="relative h-full w-full overflow-hidden rounded-full border-2 border-foreground/30"
+                style={{
+                  boxShadow: "0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(255, 255, 255, 0.1)"
+                }}
+              >
+                <img 
+                  src="/img1.jpg" 
+                  alt="Profile Avatar"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20" />
+              </div>
+            </div>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-orbitron tracking-tight text-foreground mb-8 sm:mb-12 leading-[1.1] text-balance font-bold px-2"
           >
+            I CREATE{" "}
             <motion.span 
               className="relative"
               animate={{
@@ -133,10 +179,39 @@ export default function PortfolioPage() {
                 ease: "easeInOut",
               }}
             >
-              I CREATE LIGHT
+              LIGHT
             </motion.span>
             <br />
-            <span className="text-foreground">FROM THE DARK.</span>
+            <span className="text-foreground">FROM THE </span>
+            <motion.span 
+              className="relative"
+              animate={{
+                color: [
+                  "rgba(255,255,255,1)",
+                  "rgba(255,255,255,0.7)",
+                  "rgba(255,255,255,1)",
+                ],
+                textShadow: [
+                  "0 0 5px rgba(0,0,0,0.5)",
+                  "0 0 15px rgba(0,0,0,0.8)",
+                  "0 0 25px rgba(0,0,0,0.9)",
+                  "0 0 15px rgba(0,0,0,0.8)",
+                  "0 0 5px rgba(0,0,0,0.5)",
+                ],
+                filter: [
+                  "brightness(1) contrast(1)",
+                  "brightness(1.1) contrast(1.2)",
+                  "brightness(1) contrast(1)",
+                ]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            >
+              DARK.
+            </motion.span>
           </motion.h1>
 
           <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4">
