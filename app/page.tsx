@@ -178,7 +178,7 @@ export default function PortfolioPage() {
                 }}
               >
                 <img 
-                  src="/img2.jpg" 
+                  src="/img1.jpg" 
                   alt="Profile Avatar"
                   className="w-full h-full object-cover"
                 />
