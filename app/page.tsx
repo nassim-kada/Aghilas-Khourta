@@ -183,19 +183,17 @@ export default function PortfolioPage() {
             </motion.span>
             <br />
             <span className="text-foreground">FROM THE </span>
-          <motion.span 
+        <motion.span 
   className="relative"
   animate={{
     textShadow: [
-      "0 0 8px rgba(128,0,0,0.6)",
-      "0 0 18px rgba(165,0,0,0.8)",
-      "0 0 28px rgba(255,0,0,1)",
-      "0 0 38px rgba(255,0,0,1)",
-      "0 0 28px rgba(165,0,0,0.9)",
-      "0 0 18px rgba(128,0,0,0.8)",
-      "0 0 8px rgba(128,0,0,0.6)",
+      "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
+      "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
+      "0 0 30px rgba(255,0,0,1), 0 0 60px rgba(255,0,0,0.8)",
+      "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
+      "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
     ],
-    scale: [1, 1.02, 1.04, 1.02, 1],
+    scale: [1, 1.03, 1.06, 1.03, 1],
   }}
   transition={{
     duration: 3.5,
