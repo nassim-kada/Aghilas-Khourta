@@ -183,35 +183,28 @@ export default function PortfolioPage() {
             </motion.span>
             <br />
             <span className="text-foreground">FROM THE </span>
-            <motion.span 
-              className="relative"
-              animate={{
-                color: [
-                  "rgba(255,255,255,1)",
-                  "rgba(255,255,255,0.7)",
-                  "rgba(255,255,255,1)",
-                ],
-                textShadow: [
-                  "0 0 5px rgba(0,0,0,0.5)",
-                  "0 0 15px rgba(0,0,0,0.8)",
-                  "0 0 25px rgba(0,0,0,0.9)",
-                  "0 0 15px rgba(0,0,0,0.8)",
-                  "0 0 5px rgba(0,0,0,0.5)",
-                ],
-                filter: [
-                  "brightness(1) contrast(1)",
-                  "brightness(1.1) contrast(1.2)",
-                  "brightness(1) contrast(1)",
-                ]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            >
-              DARK.
-            </motion.span>
+          <motion.span 
+  className="relative"
+  animate={{
+    textShadow: [
+      "0 0 8px rgba(128,0,0,0.6)",
+      "0 0 18px rgba(165,0,0,0.8)",
+      "0 0 28px rgba(255,0,0,1)",
+      "0 0 38px rgba(255,0,0,1)",
+      "0 0 28px rgba(165,0,0,0.9)",
+      "0 0 18px rgba(128,0,0,0.8)",
+      "0 0 8px rgba(128,0,0,0.6)",
+    ],
+    scale: [1, 1.02, 1.04, 1.02, 1],
+  }}
+  transition={{
+    duration: 3.5,
+    repeat: Number.POSITIVE_INFINITY,
+    ease: "easeInOut",
+  }}
+>
+  DARK.
+</motion.span>
           </motion.h1>
 
           <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4">
