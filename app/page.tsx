@@ -36,6 +36,36 @@ export default function PortfolioPage() {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-background">
       {/* Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+  <div className="absolute inset-0 opacity-[0.02]"
+    style={{
+      backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+      `,
+      backgroundSize: '50px 50px',
+      backgroundPosition: 'center center'
+    }}
+  />
+  <motion.div
+    className="absolute inset-0"
+    animate={{
+      backgroundPosition: ['0% 0%', '100% 100%'],
+    }}
+    transition={{
+      duration: 20,
+      repeat: Number.POSITIVE_INFINITY,
+      ease: "linear",
+    }}
+    style={{
+      backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+      `,
+      backgroundSize: '80px 80px',
+    }}
+  />
+</div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
@@ -148,7 +178,7 @@ export default function PortfolioPage() {
                 }}
               >
                 <img 
-                  src="/img1.jpg" 
+                  src="/img2.jpg" 
                   alt="Profile Avatar"
                   className="w-full h-full object-cover"
                 />
@@ -391,5 +421,6 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
     </div>
+    
   )
 }
