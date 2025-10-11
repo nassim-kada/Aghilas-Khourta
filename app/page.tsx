@@ -78,9 +78,10 @@ export default function PortfolioPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="flex min-h-screen items-center justify-center px-4 sm:px-8 pt-12 sm:pt-20">
+      <div className="flex min-h-screen items-center justify-center px-4 sm:px-8 pt-5 sm:pt-16"> {/* Reduced top padding */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center max-w-6xl">
-          <motion.div variants={itemVariants} className="mb-3 sm:mb-16 flex justify-center">
+          {/* Profile Image - Moved up */}
+          <motion.div variants={itemVariants} className="mb-2 sm:mb-8 flex justify-center -translate-y-4 sm:-translate-y-8"> {/* Reduced margin and added negative translation */}
             <div className="relative h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
               {/* Multiple glowing points around border */}
               <motion.div
@@ -157,9 +158,10 @@ export default function PortfolioPage() {
             </div>
           </motion.div>
 
+          {/* Main Title - Moved up */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-orbitron tracking-tight text-foreground mb-8 sm:mb-12 leading-[1.1] text-balance font-bold px-2"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-orbitron tracking-tight text-foreground mb-6 sm:mb-8 leading-[1.1] text-balance font-bold px-2 -translate-y-4 sm:-translate-y-6" /* Reduced margin and added negative translation */
           >
             I CREATE{" "}
             <motion.span 
@@ -205,7 +207,8 @@ export default function PortfolioPage() {
             </motion.span>
           </motion.h1>
 
-          <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4 mb-20 sm:mb-8">
+          {/* Content Creator Text - Moved up and added spacing */}
+          <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4 mb-12 sm:mb-16 -translate-y-2 sm:-translate-y-4"> {/* Increased margin bottom and added negative translation */}
             <p className="text-base sm:text-lg md:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-foreground font-rajdhani font-medium">
               CONTENT CREATOR
             </p>
@@ -220,12 +223,12 @@ export default function PortfolioPage() {
         </motion.div>
       </div>
 
-      {/* Bottom CTA Section - Enhanced */}
+      {/* Bottom CTA Section - Moved up */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 2, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50"
+        className="fixed bottom-6 sm:bottom-14 left-1/2 -translate-x-1/2 z-50" /* Moved button up */
       >
         {/* Pulsing ring effect */}
         <motion.div
