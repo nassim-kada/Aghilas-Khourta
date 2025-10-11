@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Youtube, Instagram, Linkedin, Twitter } from "lucide-react"
+import { Youtube, Instagram, Linkedin, Twitter, Ghost } from "lucide-react"
 import { SiTiktok } from "react-icons/si"
 
 export default function PortfolioPage() {
@@ -34,17 +34,17 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-background">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-background pb-32 sm:pb-24">
       {/* Background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
         transition={{ duration: 2 }}
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/10 to-transparent pointer-events-none"
+        className="fixed inset-0 bg-gradient-to-b from-transparent via-secondary/10 to-transparent pointer-events-none"
       />
 
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 sm:py-6">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-4 sm:py-6 bg-background/80 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -78,9 +78,9 @@ export default function PortfolioPage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="flex h-full items-center justify-center px-4 sm:px-8">
+      <div className="flex min-h-screen items-center justify-center px-4 sm:px-8 pt-12 sm:pt-20">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center max-w-6xl">
-          <motion.div variants={itemVariants} className="mb-8 sm:mb-16 flex justify-center">
+          <motion.div variants={itemVariants} className="mb-3 sm:mb-16 flex justify-center">
             <div className="relative h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
               {/* Multiple glowing points around border */}
               <motion.div
@@ -183,29 +183,29 @@ export default function PortfolioPage() {
             </motion.span>
             <br />
             <span className="text-foreground">FROM THE </span>
-        <motion.span 
-  className="relative"
-  animate={{
-    textShadow: [
-      "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
-      "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
-      "0 0 30px rgba(255,0,0,1), 0 0 60px rgba(255,0,0,0.8)",
-      "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
-      "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
-    ],
-    scale: [1, 1.03, 1.06, 1.03, 1],
-  }}
-  transition={{
-    duration: 3.5,
-    repeat: Number.POSITIVE_INFINITY,
-    ease: "easeInOut",
-  }}
->
-  DARK.
-</motion.span>
+            <motion.span 
+              className="relative"
+              animate={{
+                textShadow: [
+                  "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
+                  "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
+                  "0 0 30px rgba(255,0,0,1), 0 0 60px rgba(255,0,0,0.8)",
+                  "0 0 20px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.6)",
+                  "0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,0,0,0.4)",
+                ],
+                scale: [1, 1.03, 1.06, 1.03, 1],
+              }}
+              transition={{
+                duration: 3.5,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            >
+              DARK.
+            </motion.span>
           </motion.h1>
 
-          <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4">
+          <motion.div variants={itemVariants} className="space-y-3 sm:space-y-4 mb-20 sm:mb-8">
             <p className="text-base sm:text-lg md:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-foreground font-rajdhani font-medium">
               CONTENT CREATOR
             </p>
@@ -219,6 +219,138 @@ export default function PortfolioPage() {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom CTA Section - Enhanced */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-50"
+      >
+        {/* Pulsing ring effect */}
+        <motion.div
+          className="absolute inset-0 rounded-full border-2 border-foreground/30"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.5, 0, 0.5],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeOut",
+          }}
+        />
+
+        {/* Rotating glow */}
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+          style={{
+            background: "conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)",
+          }}
+        />
+        
+        <motion.a
+          href="/services"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="group relative inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-foreground/10 hover:bg-foreground/20 backdrop-blur-xl border-2 border-foreground/30 hover:border-foreground/50 rounded-full transition-all duration-500 shadow-lg"
+        >
+          {/* Inner glow effect */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-foreground/0 via-foreground/20 to-foreground/0"
+            animate={{
+              x: ["-100%", "100%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+          
+          {/* Shimmer effect */}
+          <motion.div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{
+              boxShadow: "0 0 40px rgba(255,255,255,0.3), inset 0 0 20px rgba(255,255,255,0.1)"
+            }}
+          />
+          
+          <span className="relative text-xs sm:text-sm font-rajdhani font-bold tracking-[0.25em] text-foreground">
+            VIEW SERVICES
+          </span>
+          
+          {/* Animated arrow with trail */}
+          <div className="relative">
+            <motion.svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="text-foreground relative z-10"
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            >
+              <path
+                d="M5 12H19M19 12L12 5M19 12L12 19"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+            
+            {/* Arrow trail */}
+            <motion.svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="text-foreground/30 absolute top-0 left-0"
+              animate={{ x: [0, 5, 0], opacity: [0, 0.5, 0] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.2 }}
+            >
+              <path
+                d="M5 12H19M19 12L12 5M19 12L12 19"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+          </div>
+        </motion.a>
+
+        {/* Floating particles around button */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-foreground/40 rounded-full"
+            style={{
+              left: "50%",
+              top: "50%",
+            }}
+            animate={{
+              x: [0, Math.cos((i * Math.PI * 2) / 6) * 60],
+              y: [0, Math.sin((i * Math.PI * 2) / 6) * 60],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              delay: i * 0.2,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </motion.div>
 
       {/* About Modal */}
       <AnimatePresence>
@@ -389,6 +521,5 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
     </div>
-    
   )
 }
