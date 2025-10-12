@@ -81,9 +81,9 @@ export default function PortfolioPage() {
       <div className="flex min-h-screen items-center justify-center px-4 sm:px-8 pt-5 sm:pt-16"> {/* Reduced top padding */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center max-w-6xl">
           {/* Profile Image - Moved up */}
-          <motion.div variants={itemVariants} className="mb-2 sm:mb-8 flex justify-center -translate-y-4 sm:-translate-y-8"> {/* Reduced margin and added negative translation */}
-            <div className="relative h-40 w-40 sm:h-56 sm:w-56 md:h-64 md:w-64 lg:h-72 lg:w-72">
-              {/* Multiple glowing points around border */}
+          {/* Profile Image - Moved up */}
+          <motion.div variants={itemVariants} className="mb-2 sm:mb-6 md:mb-8 flex justify-center -translate-y-4 sm:-translate-y-6 md:-translate-y-8"> {/* Reduced margin and added negative translation */}
+            <div className="relative h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-64 lg:w-64"> {/* Multiple glowing points around border */}
               <motion.div
                 className="absolute inset-0"
                 animate={{ rotate: 360 }}
