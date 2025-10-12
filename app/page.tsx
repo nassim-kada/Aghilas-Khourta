@@ -406,11 +406,8 @@ export default function PortfolioPage() {
                     </h3>
                     <div className="flex flex-wrap gap-3 sm:gap-4">
                       {[
-                        { icon: Youtube, href: "https://youtube.com" },
-                        { icon: Instagram, href: "https://instagram.com" },
-                        { icon: SiTiktok, href: "https://tiktok.com", isSvg: true },
-                        { icon: Twitter, href: "https://twitter.com" },
-                        { icon: Linkedin, href: "https://linkedin.com" },
+                        { icon: Instagram, href: "https://www.instagram.com/unleashyourtiger/" },
+                        { icon: SiTiktok, href: "https://www.tiktok.com/@badsiker", isSvg: true },
                       ].map((social, index) => (
                         <motion.div
                           key={index}
@@ -481,7 +478,7 @@ export default function PortfolioPage() {
                         href="mailto:contact@example.com"
                         className="text-foreground hover:text-foreground/70 transition-colors text-lg sm:text-xl font-rajdhani font-light tracking-wide break-all"
                       >
-                        contact@example.com
+                        khourtaghiles@gmail.com
                       </a>
                     </div>
 
@@ -497,7 +494,7 @@ export default function PortfolioPage() {
                             className="border-border/50 hover:bg-accent/50 transition-all duration-300 bg-transparent font-rajdhani tracking-wide text-xs sm:text-sm"
                             asChild
                           >
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com/unleashyourtiger/" target="_blank" rel="noopener noreferrer">
                               Instagram DM
                             </a>
                           </Button>
@@ -509,8 +506,8 @@ export default function PortfolioPage() {
                             className="border-border/50 hover:bg-accent/50 transition-all duration-300 bg-transparent font-rajdhani tracking-wide text-xs sm:text-sm"
                             asChild
                           >
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                              X/Twitter DM
+                            <a href="https://wa.me/213792520572" target="_blank" rel="noopener noreferrer">
+                              whatsapp DM
                             </a>
                           </Button>
                         </motion.div>

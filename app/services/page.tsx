@@ -447,7 +447,7 @@ export default function ServicesPage() {
                         onChange={handleInputChange}
                         required
                         className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="+1 (000) 000-0000"
                       />
                     </div>
 
