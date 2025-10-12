@@ -6,7 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Check, Sparkles, Crown, Gem } from "lucide-react"
 import Link from "next/link"
-
+import type { Metadata } from "next"
+export const metadata:Metadata={
+  title:"video editing services - simple , premium and diamonds packages |Ghiles Khourta",
+  description:"Professional video editing service by Ghiles Khourta ,"
+}
 export default function ServicesPage() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
