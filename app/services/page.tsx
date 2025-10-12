@@ -10,6 +10,33 @@ import Link from "next/link"
 export default function ServicesPage() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    setTimeout(() => {
+      console.log("Form submitted:", { ...formData, package: selectedPackage })
+      setIsSubmitting(false)
+      setContactOpen(false)
+      setFormData({ fullName: "", email: "", phone: "" })
+      // You can add actual form submission logic here
+    }, 1000)
+  }
 
   const packages = [
     {
@@ -314,7 +341,7 @@ export default function ServicesPage() {
         </div>
       </motion.div>
 
-      {/* Contact Modal */}
+      {/* Contact Modal with Form */}
       <AnimatePresence>
         {contactOpen && (
           <Dialog open={contactOpen} onOpenChange={setContactOpen}>
@@ -353,59 +380,109 @@ export default function ServicesPage() {
                     transition={{ delay: 0.1 }}
                     className="text-foreground/80 leading-relaxed text-base sm:text-lg font-rajdhani font-light"
                   >
-                    Ready to transform your content? Reach out through any of these channels and let's discuss your project.
+                    Fill out the form below and I'll get back to you within 24 hours to discuss your project.
                   </motion.p>
 
-                  <motion.div
+                  {/* Contact Form */}
+                  <motion.form
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="space-y-4 sm:space-y-6 pt-4"
+                    onSubmit={handleSubmit}
+                    className="space-y-5 sm:space-y-6"
                   >
+                    {/* Full Name */}
                     <div>
-                      <h3 className="text-xs sm:text-sm tracking-[0.2em] text-muted-foreground mb-2 sm:mb-3 font-rajdhani font-medium">
-                        EMAIL
-                      </h3>
-                      <a
-                        href="mailto:contact@example.com"
-                        className="text-foreground hover:text-foreground/70 transition-colors text-lg sm:text-xl font-rajdhani font-light tracking-wide break-all"
+                      <label 
+                        htmlFor="fullName" 
+                        className="block text-xs sm:text-sm tracking-[0.2em] text-muted-foreground mb-2 sm:mb-3 font-rajdhani font-medium"
                       >
-                        contact@example.com
-                      </a>
+                        FULL NAME *
+                      </label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        placeholder="Enter your full name"
+                      />
                     </div>
 
+                    {/* Email */}
                     <div>
-                      <h3 className="text-xs sm:text-sm tracking-[0.2em] text-muted-foreground mb-3 sm:mb-4 font-rajdhani font-medium">
-                        DIRECT MESSAGE
-                      </h3>
-                      <div className="flex flex-wrap gap-3 sm:gap-4">
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-border/50 hover:bg-accent/50 transition-all duration-300 bg-transparent font-rajdhani tracking-wide text-xs sm:text-sm"
-                            asChild
-                          >
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                              Instagram DM
-                            </a>
-                          </Button>
-                        </motion.div>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-border/50 hover:bg-accent/50 transition-all duration-300 bg-transparent font-rajdhani tracking-wide text-xs sm:text-sm"
-                            asChild
-                          >
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                              X/Twitter DM
-                            </a>
-                          </Button>
-                        </motion.div>
-                      </div>
+                      <label 
+                        htmlFor="email" 
+                        className="block text-xs sm:text-sm tracking-[0.2em] text-muted-foreground mb-2 sm:mb-3 font-rajdhani font-medium"
+                      >
+                        EMAIL ADDRESS *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        placeholder="your.email@example.com"
+                      />
                     </div>
-                  </motion.div>
+
+                    {/* Phone/WhatsApp */}
+                    <div>
+                      <label 
+                        htmlFor="phone" 
+                        className="block text-xs sm:text-sm tracking-[0.2em] text-muted-foreground mb-2 sm:mb-3 font-rajdhani font-medium"
+                      >
+                        PHONE / WHATSAPP *
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        placeholder="+1 (555) 000-0000"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="pt-2"
+                    >
+                      <motion.button
+                        type="submit"
+                        disabled={isSubmitting}
+                        whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                        className="w-full bg-foreground text-background hover:bg-foreground/90 disabled:bg-foreground/50 disabled:cursor-not-allowed font-rajdhani tracking-[0.2em] text-sm sm:text-base font-medium py-4 sm:py-5 rounded-lg transition-all duration-300 relative overflow-hidden group"
+                      >
+                        {/* Button glow effect */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                          animate={{
+                            x: isSubmitting ? ["-100%", "100%"] : "-100%",
+                          }}
+                          transition={{
+                            duration: 1,
+                            repeat: isSubmitting ? Number.POSITIVE_INFINITY : 0,
+                            ease: "linear",
+                          }}
+                        />
+                        <span className="relative">
+                          {isSubmitting ? "SUBMITTING..." : "SUBMIT REQUEST"}
+                        </span>
+                      </motion.button>
+                    </motion.div>
+                  </motion.form>
                 </div>
               </motion.div>
             </DialogContent>
