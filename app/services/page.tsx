@@ -5,12 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Check, Sparkles, Crown, Gem } from "lucide-react"
-import Link from "next/link"
-import type { Metadata } from "next"
-export const metadata:Metadata={
-  title:"video editing services - simple , premium and diamonds packages |Ghiles Khourta",
-  description:"Professional video editing service by Ghiles Khourta ,"
-}
+import Link from "next/link";
 export default function ServicesPage() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
@@ -47,15 +42,13 @@ export default function ServicesPage() {
       id: "simple",
       name: "SIMPLE",
       icon: Sparkles,
-      price: "$99",
+      price: "299 DIRHAM",
       description: "Perfect for quick, engaging content",
       features: [
-        "Video editing up to 2 minutes",
+        "Video editing up to 1 minutes(30sec 300 DIRHAM/1min 500Dirham)",
         "Basic color correction",
         "Simple transitions & effects",
         "Background music",
-        "2 rounds of revisions",
-        "3-5 day delivery",
       ],
       gradient: "from-blue-500/20 to-cyan-500/20",
       borderGlow: "rgba(59, 130, 246, 0.5)",
@@ -64,18 +57,15 @@ export default function ServicesPage() {
       id: "premium",
       name: "PREMIUM",
       icon: Crown,
-      price: "$299",
+      price: "999 DIRHAM",
       description: "Advanced editing for impactful stories",
       popular: true,
       features: [
-        "Video editing up to 5 minutes",
+        "Video editing up to 3 minutes",
         "Advanced color grading",
+        "Cinematic Video",
         "Dynamic transitions & effects",
-        "Custom motion graphics",
         "Sound design & mixing",
-        "3 rounds of revisions",
-        "1-3 day delivery",
-        "Subtitles/captions included",
       ],
       gradient: "from-purple-500/20 to-pink-500/20",
       borderGlow: "rgba(168, 85, 247, 0.5)",
@@ -84,17 +74,14 @@ export default function ServicesPage() {
       id: "diamond",
       name: "DIAMOND",
       icon: Gem,
-      price: "$599",
+      price: "1499 DIRHAM",
       description: "Cinematic masterpiece creation",
       features: [
-        "Video editing up to 10 minutes",
+        "Video editing up to 5 minutes",
         "Professional color grading",
         "Cinematic transitions & effects",
-        "Advanced motion graphics & VFX",
         "Professional sound design",
-        "Custom animations",
         "Unlimited revisions",
-        "24-48 hour delivery",
         "Subtitles/captions in multiple languages",
         "Thumbnail design included",
       ],

@@ -8,16 +8,6 @@ import { Youtube, Instagram, Linkedin, Twitter, Ghost } from "lucide-react"
 import { SiTiktok } from "react-icons/si"
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: "Ghiles Khourta - Content Creator & Video Editor | I Create Light From The Dark",
-  description: "Professional content creator and video editor Aghilas Khourta. Specializing in transforming raw footage into captivating stories that inspire and motivate.",
-  keywords: "video editor, content creator, motivational content, cinematic editing, Ghiles Khourta",
-  openGraph: {
-    title: "Aghilas Khourta - Content Creator & Video Editor",
-    description: "I create light from the dark through powerful visual storytelling and professional video editing.",
-    images: ["/img1.jpg"],
-  },
-}
 export default function PortfolioPage() {
   const [aboutOpen, setAboutOpen] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)

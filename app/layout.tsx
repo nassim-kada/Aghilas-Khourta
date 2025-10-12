@@ -17,7 +17,7 @@ const rajdhani = Rajdhani({
 })
 
 export const metadata: Metadata = {
-  title: "- Ghiles Khourta - Professional Video Editor & Content Creator | Transform Your Content",
+  title: "Ghiles Khourta - Professional Video Editor & Content Creator | Transform Your Content",
   description: "Professional video editing services by Ghiles Khourta.Transform your raw footage into captivating stories with premium editing packages . Content creator,motivator,and video editor specializing in cinematic edits",
   keywords:[
     "ghiles khourta",
