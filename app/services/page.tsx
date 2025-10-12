@@ -42,7 +42,7 @@ export default function ServicesPage() {
       id: "simple",
       name: "SIMPLE",
       icon: Sparkles,
-      price: "299 DIRHAM",
+      price: "299 AED",
       description: "Perfect for quick, engaging content",
       features: [
         "Video editing up to 1 minutes(30sec 300 DIRHAM/1min 500Dirham)",
@@ -57,7 +57,7 @@ export default function ServicesPage() {
       id: "premium",
       name: "PREMIUM",
       icon: Crown,
-      price: "999 DIRHAM",
+      price: "999 AED",
       description: "Advanced editing for impactful stories",
       popular: true,
       features: [
@@ -74,7 +74,7 @@ export default function ServicesPage() {
       id: "diamond",
       name: "DIAMOND",
       icon: Gem,
-      price: "1499 DIRHAM",
+      price: "1499 AED",
       description: "Cinematic masterpiece creation",
       features: [
         "Video editing up to 5 minutes",

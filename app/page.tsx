@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Youtube, Instagram, Linkedin, Twitter, Ghost } from "lucide-react"
 import { SiTiktok } from "react-icons/si"
-import type { Metadata } from 'next'
 
 export default function PortfolioPage() {
   const [aboutOpen, setAboutOpen] = useState(false)
