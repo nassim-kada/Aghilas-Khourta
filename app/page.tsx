@@ -143,7 +143,7 @@ export default function PortfolioPage() {
 
               {/* Profile image container */}
               <div 
-                className="relative h-full w-full overflow-hidden rounded-full border-2 border-foreground/30"
+                className="relative h-full w-full overflow-hidden rounded-full border-2 border-foreground/25"
                 style={{
                   boxShadow: "0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(255, 255, 255, 0.1)"
                 }}
