@@ -1,6 +1,10 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+"name": "Ghiles Khourta - Professional Video Editor",
+  "short_name": "Ghiles Khourta",
+  "description": "Professional video editing services and content creation by Ghiles Khourta",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

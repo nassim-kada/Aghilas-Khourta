@@ -1,0 +1,41 @@
+# robots.txt for https://ghiles-kourtha.netlify.app
+
+# Allow all crawlers access to all content
+User-agent: *
+Allow: /
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+
+# Disallow crawling of API routes and internal paths (if any)
+User-agent: *
+Disallow: /api/
+Disallow: /_next/static/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Sitemap location
+Sitemap: https://ghiles-kourtha.netlify.app/sitemap.xml
