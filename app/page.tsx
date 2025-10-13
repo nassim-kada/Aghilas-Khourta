@@ -51,7 +51,7 @@ export default function PortfolioPage() {
           transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-foreground/90 font-orbitron"
         >
-          Ghiles
+          GHILES
         </motion.div>
 
         <motion.div
