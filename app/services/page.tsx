@@ -4,8 +4,9 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Check, Sparkles, Crown, Gem } from "lucide-react"
+import { Check, Sparkles, Crown, Gem } from "lucide-react";
 import Link from "next/link";
+
 export default function ServicesPage() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null)
   const [contactOpen, setContactOpen] = useState(false)
@@ -15,6 +16,10 @@ export default function ServicesPage() {
     phone: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -23,18 +28,52 @@ export default function ServicesPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: '' })
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log("Form submitted:", { ...formData, package: selectedPackage })
+    try {
+      const response = await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          package: selectedPackage,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you! Your inquiry has been sent successfully. I\'ll get back to you within 24 hours.',
+        })
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setContactOpen(false)
+          setFormData({ fullName: "", email: "", phone: "" })
+          setSubmitStatus({ type: null, message: '' })
+        }, 3000)
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send your inquiry. Please try again.',
+        })
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: 'An unexpected error occurred. Please try again later.',
+      })
+    } finally {
       setIsSubmitting(false)
-      setContactOpen(false)
-      setFormData({ fullName: "", email: "", phone: "" })
-      // You can add actual form submission logic here
-    }, 1000)
+    }
   }
 
   const packages = [
@@ -45,7 +84,7 @@ export default function ServicesPage() {
       price: "299 AED",
       description: "Perfect for quick, engaging content",
       features: [
-        "Video editing up to 1 minutes(30sec 300 AEclD/1min 500 AED)",
+        "Video editing up to 1 minutes(30sec 300 AED/1min 500 AED)",
         "Basic color correction",
         "Simple transitions & effects",
         "Background music",
@@ -116,6 +155,7 @@ export default function ServicesPage() {
   const handleGetStarted = (packageName: string) => {
     setSelectedPackage(packageName)
     setContactOpen(true)
+    setSubmitStatus({ type: null, message: '' })
   }
 
   return (
@@ -136,7 +176,7 @@ export default function ServicesPage() {
           transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           <Link href="/" className="text-base sm:text-xl tracking-[0.2em] sm:tracking-[0.3em] text-foreground/90 font-orbitron hover:text-foreground transition-colors">
-            AGHILAS
+            GHILES
           </Link>
         </motion.div>
 
@@ -231,7 +271,6 @@ export default function ServicesPage() {
                   boxShadow: `0 0 30px ${pkg.borderGlow}`,
                 }}
               >
-                {/* Icon */}
                 <div className="mb-3 sm:mb-4 md:mb-6 flex justify-center">
                   <div className="relative">
                     <motion.div
@@ -249,12 +288,10 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                {/* Package Name */}
                 <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-orbitron tracking-tight text-foreground text-center mb-1 sm:mb-2">
                   {pkg.name}
                 </h3>
 
-                {/* Price */}
                 <div className="text-center mb-2 sm:mb-3 md:mb-4">
                   <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground font-orbitron">
                     {pkg.price}
@@ -262,12 +299,10 @@ export default function ServicesPage() {
                   <span className="text-foreground/60 text-xs sm:text-sm font-rajdhani ml-1 sm:ml-2">per video</span>
                 </div>
 
-                {/* Description */}
                 <p className="text-center text-foreground/70 font-rajdhani text-xs sm:text-sm md:text-base mb-3 sm:mb-4 md:mb-6 lg:mb-8">
                   {pkg.description}
                 </p>
 
-                {/* Features */}
                 <ul className="space-y-1.5 sm:space-y-2 md:space-y-3 lg:space-y-4 mb-4 sm:mb-6 md:mb-8">
                   {pkg.features.map((feature, i) => (
                     <motion.li
@@ -285,7 +320,6 @@ export default function ServicesPage() {
                   ))}
                 </ul>
 
-                {/* CTA Button */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -374,6 +408,24 @@ export default function ServicesPage() {
                     Fill out the form below and I'll get back to you within 24 hours to discuss your project.
                   </motion.p>
 
+                  {/* Status Message */}
+                  <AnimatePresence>
+                    {submitStatus.type && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`p-4 rounded-lg border ${
+                          submitStatus.type === 'success'
+                            ? 'bg-green-500/10 border-green-500/30 text-green-600 dark:text-green-400'
+                            : 'bg-red-500/10 border-red-500/30 text-red-600 dark:text-red-400'
+                        }`}
+                      >
+                        <p className="text-sm font-rajdhani">{submitStatus.message}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   {/* Contact Form */}
                   <motion.form
                     initial={{ opacity: 0, y: 10 }}
@@ -382,7 +434,6 @@ export default function ServicesPage() {
                     onSubmit={handleSubmit}
                     className="space-y-5 sm:space-y-6"
                   >
-                    {/* Full Name */}
                     <div>
                       <label 
                         htmlFor="fullName" 
@@ -397,12 +448,12 @@ export default function ServicesPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        disabled={isSubmitting}
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="Enter your full name"
                       />
                     </div>
 
-                    {/* Email */}
                     <div>
                       <label 
                         htmlFor="email" 
@@ -417,12 +468,12 @@ export default function ServicesPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        disabled={isSubmitting}
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="your.email@example.com"
                       />
                     </div>
 
-                    {/* Phone/WhatsApp */}
                     <div>
                       <label 
                         htmlFor="phone" 
@@ -437,12 +488,12 @@ export default function ServicesPage() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300"
+                        disabled={isSubmitting}
+                        className="w-full bg-foreground/5 border border-foreground/20 rounded-lg px-4 py-3 sm:py-4 text-foreground font-rajdhani text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-foreground/30 focus:border-foreground/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="+1 (000) 000-0000"
                       />
                     </div>
 
-                    {/* Submit Button */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -456,7 +507,6 @@ export default function ServicesPage() {
                         whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                         className="w-full bg-foreground text-background hover:bg-foreground/90 disabled:bg-foreground/50 disabled:cursor-not-allowed font-rajdhani tracking-[0.2em] text-sm sm:text-base font-medium py-4 sm:py-5 rounded-lg transition-all duration-300 relative overflow-hidden group"
                       >
-                        {/* Button glow effect */}
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                           animate={{
