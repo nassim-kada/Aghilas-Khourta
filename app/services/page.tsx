@@ -45,7 +45,7 @@ export default function ServicesPage() {
       price: "299 AED",
       description: "Perfect for quick, engaging content",
       features: [
-        "Video editing up to 1 minutes(30sec 300 AED/1min 500 AED)",
+        "Video editing up to 1 minutes(30sec 300 AEclD/1min 500 AED)",
         "Basic color correction",
         "Simple transitions & effects",
         "Background music",
