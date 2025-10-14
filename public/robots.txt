@@ -19,11 +19,6 @@ Crawl-delay: 0
 User-agent: Slurp
 Allow: /
 
-# Disallow crawling of API routes and internal paths (if any)
-User-agent: *
-Disallow: /api/
-Disallow: /_next/static/
-
 # Allow social media crawlers
 User-agent: facebookexternalhit
 Allow: /
