@@ -1,13 +1,20 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Email interface matching the form data
+interface EmailRequest {
+  fullName: string;
+  email: string;
+  phone: string;
+  package: string;
+}
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body: EmailRequest = await request.json();
     const { fullName, email, phone, package: selectedPackage } = body;
 
+    // Validate required fields
     if (!fullName || !email || !phone || !selectedPackage) {
       return NextResponse.json(
         { error: 'All fields are required' },
@@ -15,61 +22,115 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data, error } = await resend.emails.send({
-      from: 'GHILES <onboarding@resend.dev>',
-      to: ['nassim.kada.13.14@gmail.com'],
-      subject: `🎬 New Video Service Inquiry - ${selectedPackage}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center;">
-            <h1 style="margin: 0; font-size: 28px;">NEW VIDEO SERVICE INQUIRY</h1>
-          </div>
-          
-          <div style="padding: 30px; background: #f9f9f9;">
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
-              <div style="font-size: 14px; opacity: 0.9;">Selected Package</div>
-              <div style="font-size: 24px; font-weight: bold;">${selectedPackage}</div>
-            </div>
-            
-            <div style="background: white; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #667eea;">
-              <strong>Client Information:</strong><br>
-              Name: ${fullName}<br>
-              Email: <a href="mailto:${email}">${email}</a><br>
-              Phone: <a href="tel:${phone}">${phone}</a><br>
-              WhatsApp/phone Number: <a href="${phone})}">Click to chat</a>
-            </div>
-
-            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
-              <strong>⏰ Action Required:</strong> Please respond within 24 hours
-            </div>
-
-            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #ddd; color: #666;">
-              <p>Submitted: ${new Date().toLocaleString()}</p>
-              <p>From GHILES Video Services Website</p>
-            </div>
-          </div>
-        </div>
-      `,
-    });
-
-    if (error) {
-      console.error('Resend error:', error);
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Failed to send email' },
-        { status: 500 }
+        { error: 'Please provide a valid email address' },
+        { status: 400 }
       );
     }
 
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD, // Use app password, not regular password
+      },
+    });
+
+    // Email content
+    const mailOptions = {
+      from: `"Website Contact" <${process.env.GMAIL_USER}>`,
+      to: process.env.GMAIL_USER, // Send to yourself
+      replyTo: email,
+      subject: `New Service Inquiry - ${selectedPackage} Package`,
+      html: `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <style>
+              body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+              .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
+              .content { background: #f9f9f9; padding: 20px; border-radius: 0 0 10px 10px; }
+              .field { margin-bottom: 15px; padding: 10px; background: white; border-radius: 5px; border-left: 4px solid #667eea; }
+              .label { font-weight: bold; color: #667eea; display: block; margin-bottom: 5px; }
+              .value { color: #333; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>New Service Inquiry</h1>
+                <p>Package: ${selectedPackage}</p>
+              </div>
+              <div class="content">
+                <div class="field">
+                  <span class="label">Client Name:</span>
+                  <span class="value">${fullName}</span>
+                </div>
+                <div class="field">
+                  <span class="label">Email:</span>
+                  <span class="value">${email}</span>
+                </div>
+                <div class="field">
+                  <span class="label">Phone/WhatsApp:</span>
+                  <span class="value">${phone}</span>
+                </div>
+                <div class="field">
+                  <span class="label">Selected Package:</span>
+                  <span class="value">${selectedPackage}</span>
+                </div>
+                <div class="field">
+                  <span class="label">Submission Time:</span>
+                  <span class="value">${new Date().toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          </body>
+        </html>
+      `,
+      text: `
+New Service Inquiry Received:
+
+Client Name: ${fullName}
+Email: ${email}
+Phone/WhatsApp: ${phone}
+Selected Package: ${selectedPackage}
+Submission Time: ${new Date().toLocaleString()}
+
+Please respond within 24 hours.
+      `.trim(),
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+
     return NextResponse.json(
-      { message: 'Inquiry submitted successfully! We will contact you within 24 hours.' },
+      { success: true, message: 'Email sent successfully' },
       { status: 200 }
     );
 
   } catch (error) {
-    console.error('Server error:', error);
+    console.error('Error sending email:', error);
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Failed to send email. Please try again later.' 
+      },
       { status: 500 }
     );
   }
+}
+
+// Optional: Add GET method for testing
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Email API is working' },
+    { status: 200 }
+  );
 }
