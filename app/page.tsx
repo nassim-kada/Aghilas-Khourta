@@ -408,6 +408,7 @@ export default function PortfolioPage() {
                       {[
                         { icon: Instagram, href: "https://www.instagram.com/unleashyourtiger/" },
                         { icon: SiTiktok, href: "https://www.tiktok.com/@badsiker", isSvg: true },
+                        {icon : Linkedin, href:"https://www.linkedin.com/in/ghiles-khourta-139446300/"}
                       ].map((social, index) => (
                         <motion.div
                           key={index}
