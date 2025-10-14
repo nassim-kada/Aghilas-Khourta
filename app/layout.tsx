@@ -294,7 +294,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
-        
+        <meta name="google-site-verification" content="N0yWNsESWbOy7kj-ON4NcJjRezRX360D_NBsg14S-fg" />
+        <meta name="google-site-verification" content="N0yWNsESWbOy7kj-ON4NcJjRezRX360D_NBsg14S-fg" />
         {/* Theme and mobile optimization */}
         <meta name="theme-color" content="#000000" />
         <meta name="mobile-web-app-capable" content="yes" />
